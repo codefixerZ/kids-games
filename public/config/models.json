@@ -1,0 +1,13 @@
+[
+  {
+    "id": "doodlenet",
+    "name": "Quick Draw (doodleNet)",
+    "description": "345 sketch categories from Google Quick Draw dataset",
+    "modelUrl": "/models/doodlenet/model.json",
+    "classesUrl": "/models/doodlenet/class_names.txt",
+    "inputSize": 28,
+    "invert": true,
+    "grayscale": true,
+    "active": true
+  }
+]
