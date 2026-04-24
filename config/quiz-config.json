@@ -1,0 +1,5 @@
+{
+  "geminiApiKey": "YOUR_GEMINI_API_KEY",
+  "questionsPerRound": 8,
+  "_note": "Get a free API key at https://aistudio.google.com/app/apikey — the game works without a key using built-in fallback questions."
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "category": "animals",
+    "question": "Con vật nào có vòi dài?",
+    "options": ["Hươu cao cổ", "Voi", "Tê giác", "Hà mã"],
+    "correct": 1,
+    "explanation": "Voi có cái vòi dài dùng để uống nước và cầm đồ vật."
+  },
+  {
+    "category": "math",
+    "question": "6 × 6 = ?",
+    "options": ["32", "34", "36", "38"],
+    "correct": 2,
+    "explanation": "6 × 6 = 36"
+  }
+]

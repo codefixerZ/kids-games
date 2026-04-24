@@ -1,0 +1,26 @@
+HOW TO ADD WORD IMAGES
+======================
+
+1. Drop any image file here (PNG, JPG, WebP).
+   Example: cat.png, dog.jpg, apple.png
+
+2. In public/config/words.json, set the "image" field:
+   {
+     "draw": "MÈO",
+     "label": "cat",
+     "emoji": "🐱",
+     "image": "cat.png"    ← filename only, no path needed
+   }
+
+3. The game will show your image instead of the emoji.
+   Recommended size: 200×200 px, square crop.
+
+IMAGE SOURCES (free, no copyright):
+- https://openmoji.org  (open-source emoji as PNG, 618×618)
+- https://twemoji.twitter.com  (Twitter emoji as SVG/PNG)
+- https://icons8.com/icons/set/animals  (free icons)
+- Google Images → Tools → Usage Rights → Creative Commons
+
+AVAILABLE LABELS (what the AI can recognise):
+See public/config/available_labels.txt for all 345 categories.
+Your "label" field in words.json MUST match one of those exactly.

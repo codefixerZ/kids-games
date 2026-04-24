@@ -1,0 +1,182 @@
+[
+  {
+    "draw": "MÈO",
+    "label": "cat",
+    "emoji": "🐱",
+    "vi": "Con mèo",
+    "hint": "Draw pointy ears and whiskers!",
+    "hintVi": "Vẽ tai nhọn và râu mèo!",
+    "image": null
+  },
+  {
+    "draw": "CHÓ",
+    "label": "dog",
+    "emoji": "🐶",
+    "vi": "Con chó",
+    "hint": "Big floppy ears and a wagging tail!",
+    "hintVi": "Tai to cụp xuống và đuôi vẫy vẫy!",
+    "image": null
+  },
+  {
+    "draw": "CHIM",
+    "label": "bird",
+    "emoji": "🐦",
+    "vi": "Con chim",
+    "hint": "Wings and a little beak!",
+    "hintVi": "Đôi cánh và cái mỏ nhỏ xinh!",
+    "image": null
+  },
+  {
+    "draw": "CÁ",
+    "label": "fish",
+    "emoji": "🐟",
+    "vi": "Con cá",
+    "hint": "Oval body with fins and a tail!",
+    "hintVi": "Thân hình bầu dục với vây và đuôi!",
+    "image": null
+  },
+  {
+    "draw": "XE HƠI",
+    "label": "car",
+    "emoji": "🚗",
+    "vi": "Xe ô tô",
+    "hint": "Four wheels and a boxy body!",
+    "hintVi": "Bốn bánh xe và thân hình chữ nhật!",
+    "image": null
+  },
+  {
+    "draw": "MÁY BAY",
+    "label": "airplane",
+    "emoji": "✈️",
+    "vi": "Máy bay",
+    "hint": "Long wings and a pointed nose!",
+    "hintVi": "Cánh dài và mũi nhọn!",
+    "image": null
+  },
+  {
+    "draw": "TÀU HỎA",
+    "label": "train",
+    "emoji": "🚂",
+    "vi": "Xe lửa",
+    "hint": "Long rectangle with wheels on a track!",
+    "hintVi": "Hình chữ nhật dài với bánh xe trên đường ray!",
+    "image": null
+  },
+  {
+    "draw": "XE ĐẠP",
+    "label": "bicycle",
+    "emoji": "🚲",
+    "vi": "Xe đạp",
+    "hint": "Two wheels and a frame between them!",
+    "hintVi": "Hai bánh xe và khung nối ở giữa!",
+    "image": null
+  },
+  {
+    "draw": "THUYỀN",
+    "label": "sailboat",
+    "emoji": "⛵",
+    "vi": "Thuyền buồm",
+    "hint": "A triangle sail on top of a boat hull!",
+    "hintVi": "Cánh buồm tam giác trên thân thuyền!",
+    "image": null
+  },
+  {
+    "draw": "XE BUÝT",
+    "label": "bus",
+    "emoji": "🚌",
+    "vi": "Xe buýt",
+    "hint": "Big rectangle with lots of windows!",
+    "hintVi": "Hình chữ nhật to với nhiều cửa sổ!",
+    "image": null
+  },
+  {
+    "draw": "VOI",
+    "label": "elephant",
+    "emoji": "🐘",
+    "vi": "Con voi",
+    "hint": "Big ears and a long trunk!",
+    "hintVi": "Tai to và vòi dài!",
+    "image": null
+  },
+  {
+    "draw": "GẤU",
+    "label": "bear",
+    "emoji": "🐻",
+    "vi": "Con gấu",
+    "hint": "Round body, small ears, big paws!",
+    "hintVi": "Thân tròn, tai nhỏ, bàn chân to!",
+    "image": null
+  },
+  {
+    "draw": "TÁO",
+    "label": "apple",
+    "emoji": "🍎",
+    "vi": "Quả táo",
+    "hint": "Round fruit with a little stem on top!",
+    "hintVi": "Quả tròn với cuống nhỏ phía trên!",
+    "image": null
+  },
+  {
+    "draw": "NHÀ",
+    "label": "house",
+    "emoji": "🏠",
+    "vi": "Ngôi nhà",
+    "hint": "Square walls with a triangle roof!",
+    "hintVi": "Tường hình vuông với mái nhà tam giác!",
+    "image": null
+  },
+  {
+    "draw": "CÂY",
+    "label": "tree",
+    "emoji": "🌳",
+    "vi": "Cái cây",
+    "hint": "Brown trunk with a green fluffy top!",
+    "hintVi": "Thân cây nâu với tán lá xanh bồng bềnh!",
+    "image": null
+  },
+  {
+    "draw": "MẶT TRỜI",
+    "label": "sun",
+    "emoji": "☀️",
+    "vi": "Mặt trời",
+    "hint": "A circle with rays all around it!",
+    "hintVi": "Hình tròn với các tia sáng xung quanh!",
+    "image": null
+  },
+  {
+    "draw": "SAO",
+    "label": "star",
+    "emoji": "⭐",
+    "vi": "Ngôi sao",
+    "hint": "Five points sticking out from the center!",
+    "hintVi": "Năm cánh tỏa ra từ trung tâm!",
+    "image": null
+  },
+  {
+    "draw": "HOA",
+    "label": "flower",
+    "emoji": "🌸",
+    "vi": "Bông hoa",
+    "hint": "Round petals around a circle center!",
+    "hintVi": "Các cánh hoa tròn xung quanh nhụy hoa!",
+    "image": null
+  },
+  {
+    "draw": "PIZZA",
+    "label": "pizza",
+    "emoji": "🍕",
+    "vi": "Bánh pizza",
+    "hint": "A triangle slice or a round pie with toppings!",
+    "hintVi": "Miếng tam giác hoặc bánh tròn với nhân!",
+    "image": null
+  },
+  {
+    "draw": "ĐÀN",
+    "label": "guitar",
+    "emoji": "🎸",
+    "vi": "Đàn ghi-ta",
+    "hint": "Shaped like a figure-8 with a long neck!",
+    "hintVi": "Hình số 8 với cần đàn dài!",
+    "image": null
+  }
+]
