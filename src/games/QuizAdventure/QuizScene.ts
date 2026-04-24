@@ -297,26 +297,29 @@ export class QuizScene extends Phaser.Scene {
 
   // ─── Show question ─────────────────────────────────────────────────────────
   private showQuestion(q: QuizQuestion) {
+    const LETTERS = ['A', 'B', 'C', 'D'];
+
+    // Reset styles and text BEFORE making buttons visible, so no stale content flashes
+    this.answerBtns.forEach((b, i) => {
+      this.tweens.killTweensOf([b.bg, b.label, b.letter]);
+      b.bg.setFillStyle(0x1a3060);
+      b.bg.setStrokeStyle(2, 0x3355aa);
+      b.bg.setAlpha(0);
+      b.bg.setInteractive({ useHandCursor: true }); // re-enable after disableInteractive()
+      b.label.setText(q.options[i] ?? '');
+      b.label.setAlpha(0);
+      b.letter.setText(LETTERS[i]);
+      b.letter.setAlpha(0);
+    });
+
     this.setState('playing');
     this.character.setText(q.question);
 
-    const LETTERS = ['A', 'B', 'C', 'D'];
+    // Entrance animation
     this.answerBtns.forEach((b, i) => {
-      b.bg.setFillStyle(0x1a3060);
-      b.bg.setStrokeStyle(2, 0x3355aa);
-      b.bg.setAlpha(1);
-      b.label.setText(q.options[i] ?? '');
-      b.letter.setText(LETTERS[i]);
-    });
-
-    // Entrance animation for buttons
-    this.answerBtns.forEach((b, i) => {
-      b.bg.setAlpha(0);
-      b.label.setAlpha(0);
       this.tweens.add({
         targets: [b.bg, b.label, b.letter],
         alpha: 1,
-        x: `+=${0}`,
         duration: 200,
         delay: i * 60,
         ease: 'Back.easeOut',
