@@ -10,6 +10,7 @@ import { OddOneOutScene } from './games/OddOneOut/OddOneOutScene';
 import { RotatePuzzleScene } from './games/RotatePuzzle/RotatePuzzleScene';
 import { ColoringScene } from './games/ColoringGame/ColoringScene';
 import { TicTacToeScene } from './games/TicTacToe/TicTacToeScene';
+import { WorldMapScene }  from './scenes/WorldMapScene';
 import { MathKingdomMapScene }    from './games/MathKingdom/MapScene';
 import { MathKingdomGameScene }   from './games/MathKingdom/GameScene';
 import { MathKingdomRewardScene } from './games/MathKingdom/RewardScene';
@@ -19,8 +20,8 @@ const config: Phaser.Types.Core.GameConfig = {
   width: GAME_WIDTH,
   height: GAME_HEIGHT,
   backgroundColor: '#1a1a2e',
-  scene: [BootScene, MenuScene, DrawGuessScene, QuizScene, MemoryScene, CountingScene,
-          OddOneOutScene, RotatePuzzleScene, ColoringScene, TicTacToeScene,
+  scene: [BootScene, WorldMapScene, MenuScene, DrawGuessScene, QuizScene, MemoryScene,
+          CountingScene, OddOneOutScene, RotatePuzzleScene, ColoringScene, TicTacToeScene,
           MathKingdomMapScene, MathKingdomGameScene, MathKingdomRewardScene],
   parent: document.body,
   scale: {

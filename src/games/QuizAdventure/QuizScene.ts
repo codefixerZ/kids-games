@@ -1,6 +1,7 @@
 import * as Phaser from 'phaser';
 import { GAME_WIDTH, GAME_HEIGHT, SCENE_KEYS, COLORS } from '../../config';
 import { QuizAPI, QuizQuestion, CATEGORIES } from './QuizAPI';
+import { GlobalProgressState } from '../../state/GlobalProgressState';
 import { CharacterSprite } from './CharacterSprite';
 
 // ─── Layout ───────────────────────────────────────────────────────────────
@@ -44,6 +45,7 @@ export class QuizScene extends Phaser.Scene {
   private score = 0;
   private streak = 0;
   private questionCount = 0;
+  private gameStartMs = 0;
   private state: State = 'select';
   private answered = false;
 
@@ -52,6 +54,7 @@ export class QuizScene extends Phaser.Scene {
   }
 
   create() {
+    this.gameStartMs = Date.now();
     this.score = 0;
     this.streak = 0;
     this.questionCount = 0;
@@ -425,6 +428,10 @@ export class QuizScene extends Phaser.Scene {
     }).setOrigin(0.5, 0));
 
     const accuracy = Math.round((this.score / (QUESTIONS_PER_ROUND * 10)) * 100);
+    const quizStars: 1 | 2 | 3 = accuracy >= 90 ? 3 : accuracy >= 60 ? 2 : 1;
+    GlobalProgressState.getInstance().recordPlay(
+      SCENE_KEYS.QUIZ, quizStars, Date.now() - this.gameStartMs,
+    );
     this.endOverlay.add(this.add.text(cx, cy - H / 2 + 116, `${QUESTIONS_PER_ROUND} câu  •  ${accuracy}% đúng`, {
       fontSize: '15px', color: '#aaaacc', fontFamily: 'Arial',
     }).setOrigin(0.5, 0));
@@ -467,7 +474,7 @@ export class QuizScene extends Phaser.Scene {
   private goToMenu() {
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.cameras.main.once('camerafadeoutcomplete', () => {
-      this.scene.start(SCENE_KEYS.MENU);
+      this.scene.start(SCENE_KEYS.WORLD_MAP);
     });
   }
 }

@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import { GAME_WIDTH, GAME_HEIGHT, SCENE_KEYS } from '../../config';
+import { GlobalProgressState } from '../../state/GlobalProgressState';
 
 // ── Layout ────────────────────────────────────────────────────────────────────
 const HEADER_H   = 45;
@@ -415,6 +416,8 @@ export class RotatePuzzleScene extends Phaser.Scene {
     const GRID  = PUZZLES[this.puzzleIdx % PUZZLES.length].grid;
     const total = GRID * GRID;
     const stars = this.moves <= total ? '⭐⭐⭐' : this.moves <= total * 2 ? '⭐⭐' : '⭐';
+    const starCount: 1 | 2 | 3 = this.moves <= total ? 3 : this.moves <= total * 2 ? 2 : 1;
+    GlobalProgressState.getInstance().recordPlay(SCENE_KEYS.ROTATE_PUZZLE, starCount, 0);
 
     this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x000000, 0.65).setDepth(20);
     const p = this.add.container(GAME_WIDTH / 2, GAME_HEIGHT / 2).setDepth(21);
@@ -440,6 +443,6 @@ export class RotatePuzzleScene extends Phaser.Scene {
 
   private goToMenu() {
     this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start(SCENE_KEYS.MENU));
+    this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start(SCENE_KEYS.WORLD_MAP));
   }
 }

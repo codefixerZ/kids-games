@@ -6,6 +6,7 @@ import { ScoreManager } from './ScoreManager';
 import { VocabDisplay } from './VocabDisplay';
 import { AIGuesser } from './AIGuesser';
 import { loadWordList } from './wordList';
+import { GlobalProgressState } from '../../state/GlobalProgressState';
 
 // Portrait layout constants
 const HEADER_H   = 45;
@@ -30,12 +31,14 @@ export class DrawGuessScene extends Phaser.Scene {
   private aiGuesser!: AIGuesser;
   private headerScoreText!: Phaser.GameObjects.Text;
   private guessing = false;
+  private gameStartMs = 0;
 
   constructor() {
     super({ key: SCENE_KEYS.DRAW_GUESS });
   }
 
   create() {
+    this.gameStartMs = Date.now();
     this.drawBackground();
     this.drawHeader();
 
@@ -100,6 +103,10 @@ export class DrawGuessScene extends Phaser.Scene {
     this.scoreManager.on('roundEnd', ({ score }: { score: number }) => {
       this.drawingCanvas.hide();
       this.vocabDisplay.showRoundEnd(score);
+      const stars: 1 | 2 | 3 = score >= 100 ? 3 : score >= 50 ? 2 : 1;
+      GlobalProgressState.getInstance().recordPlay(
+        SCENE_KEYS.DRAW_GUESS, stars, Date.now() - this.gameStartMs,
+      );
     });
 
     this.vocabDisplay.onNextWord   = () => this.advanceWord();
@@ -140,7 +147,7 @@ export class DrawGuessScene extends Phaser.Scene {
   private goToMenu() {
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.cameras.main.once('camerafadeoutcomplete', () => {
-      this.scene.start(SCENE_KEYS.MENU);
+      this.scene.start(SCENE_KEYS.WORLD_MAP);
     });
   }
 }

@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import { GAME_WIDTH, GAME_HEIGHT, SCENE_KEYS } from '../../config';
+import { GlobalProgressState } from '../../state/GlobalProgressState';
 
 // ── Layout ────────────────────────────────────────────────────────────────────
 const HEADER_H   = 45;
@@ -43,8 +44,9 @@ interface BtnData {
 
 export class CountingScene extends Phaser.Scene {
   // ── State ──────────────────────────────────────────────────────────────────
-  private score   = 0;
-  private round   = 0;
+  private score      = 0;
+  private round      = 0;
+  private gameStartMs = 0;
   private correct = 0;
   private busy    = false;
 
@@ -65,6 +67,7 @@ export class CountingScene extends Phaser.Scene {
 
   // ─────────────────────────────────────────────────────────────────────────
   create() {
+    this.gameStartMs = Date.now();
     this.score = 0;
     this.round = 0;
     this.busy  = false;
@@ -407,6 +410,10 @@ export class CountingScene extends Phaser.Scene {
 
     const pct   = Math.round((this.score / (ROUNDS * 10)) * 100);
     const stars = pct >= 90 ? '⭐⭐⭐' : pct >= 60 ? '⭐⭐' : '⭐';
+    const starCount: 1 | 2 | 3 = pct >= 90 ? 3 : pct >= 60 ? 2 : 1;
+    GlobalProgressState.getInstance().recordPlay(
+      SCENE_KEYS.COUNTING, starCount, Date.now() - this.gameStartMs,
+    );
 
     const trophy  = this.add.text(0, -158, '🏆', { fontSize: '56px' }).setOrigin(0.5);
     const title   = this.add.text(0, -96, 'Hoàn thành rồi!', {
@@ -449,6 +456,6 @@ export class CountingScene extends Phaser.Scene {
   // ── Navigation ─────────────────────────────────────────────────────────────
   private goToMenu() {
     this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start(SCENE_KEYS.MENU));
+    this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start(SCENE_KEYS.WORLD_MAP));
   }
 }

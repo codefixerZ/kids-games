@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import { GAME_WIDTH, GAME_HEIGHT, SCENE_KEYS } from '../../config';
+import { GlobalProgressState } from '../../state/GlobalProgressState';
 
 // ── Grid config ───────────────────────────────────────────────────────────────
 const GS       = 6;            // 6×6 grid = 36 cells
@@ -285,6 +286,8 @@ export class TicTacToeScene extends Phaser.Scene {
     else if (result === 'ai')  { this.aiScore++;    this.setStatus('🤖 AI thắng!'); }
     else                       { this.draws++;      this.setStatus('🤝 Hòa!'); }
     this.refreshScore();
+    const tttStars: 1 | 2 | 3 = result === 'player' ? 3 : result === 'draw' ? 2 : 1;
+    GlobalProgressState.getInstance().recordPlay(SCENE_KEYS.TIC_TAC_TOE, tttStars, 0);
     this.time.delayedCall(1600, () => this.resetBoard());
   }
 
@@ -361,6 +364,6 @@ export class TicTacToeScene extends Phaser.Scene {
 
   private goToMenu() {
     this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start(SCENE_KEYS.MENU));
+    this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start(SCENE_KEYS.WORLD_MAP));
   }
 }

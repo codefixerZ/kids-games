@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import { GAME_WIDTH, GAME_HEIGHT, SCENE_KEYS } from '../../config';
+import { GlobalProgressState } from '../../state/GlobalProgressState';
 
 // ── Layout ────────────────────────────────────────────────────────────────────
 const HEADER_H   = 45;
@@ -377,6 +378,7 @@ export class ColoringScene extends Phaser.Scene {
   }
 
   private saveImage() {
+    GlobalProgressState.getInstance().recordPlay(SCENE_KEYS.COLORING, 3, 0);
     const link = document.createElement('a');
     link.download = `to-mau-${Date.now()}.png`;
     link.href = this.overlayCanvas.toDataURL('image/png');
@@ -386,6 +388,6 @@ export class ColoringScene extends Phaser.Scene {
   private goToMenu() {
     this.overlayCanvas?.remove();
     this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start(SCENE_KEYS.MENU));
+    this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start(SCENE_KEYS.WORLD_MAP));
   }
 }

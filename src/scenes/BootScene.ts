@@ -11,6 +11,6 @@ export class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start(SCENE_KEYS.MENU);
+    this.scene.start(SCENE_KEYS.WORLD_MAP);
   }
 }

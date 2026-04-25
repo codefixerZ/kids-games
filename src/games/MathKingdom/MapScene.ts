@@ -210,7 +210,7 @@ export class MathKingdomMapScene extends Phaser.Scene {
   private goToMenu() {
     this.cameras.main.fadeOut(280, 0, 0, 0);
     this.cameras.main.once('camerafadeoutcomplete', () => {
-      this.scene.start(SCENE_KEYS.MENU);
+      this.scene.start(SCENE_KEYS.WORLD_MAP);
     });
   }
 }

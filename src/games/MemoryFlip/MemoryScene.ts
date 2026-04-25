@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import { GAME_WIDTH, GAME_HEIGHT, SCENE_KEYS, COLORS } from '../../config';
+import { GlobalProgressState } from '../../state/GlobalProgressState';
 import { MemoryCard, CardData } from './MemoryCard';
 
 // ─── Layout ────────────────────────────────────────────────────────────────
@@ -364,6 +365,9 @@ export class MemoryScene extends Phaser.Scene {
 
     // Stars
     const stars = this.calcStars();
+    GlobalProgressState.getInstance().recordPlay(
+      SCENE_KEYS.MEMORY, stars as 1 | 2 | 3, this.seconds * 1000,
+    );
     const starStr = '⭐'.repeat(stars) + '☆'.repeat(3 - stars);
     this.winOverlay.add(this.add.text(cx, cy - H / 2 + 22, starStr, {
       fontSize: '38px',
@@ -426,7 +430,7 @@ export class MemoryScene extends Phaser.Scene {
   private goToMenu() {
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.cameras.main.once('camerafadeoutcomplete', () => {
-      this.scene.start(SCENE_KEYS.MENU);
+      this.scene.start(SCENE_KEYS.WORLD_MAP);
     });
   }
 }

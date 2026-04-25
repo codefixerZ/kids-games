@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 import { GAME_WIDTH, GAME_HEIGHT, SCENE_KEYS } from '../../config';
+import { GlobalProgressState } from '../../state/GlobalProgressState';
 
 // ── Layout ────────────────────────────────────────────────────────────────────
 const HEADER_H  = 45;
@@ -43,8 +44,9 @@ const RAW: [string,string,string,string,string,string,string][] = [
 interface CardData { emoji: string; isOdd: boolean; origIdx: number; }
 
 export class OddOneOutScene extends Phaser.Scene {
-  private score       = 0;
-  private round       = 0;
+  private score        = 0;
+  private round        = 0;
+  private gameStartMs  = 0;
   private busy        = false;
   private usedIdxs    = new Set<number>();
 
@@ -56,6 +58,7 @@ export class OddOneOutScene extends Phaser.Scene {
   constructor() { super({ key: SCENE_KEYS.ODD_ONE_OUT }); }
 
   create() {
+    this.gameStartMs = Date.now();
     this.score    = 0;
     this.round    = 0;
     this.busy     = false;
@@ -219,6 +222,10 @@ export class OddOneOutScene extends Phaser.Scene {
     const p = this.add.container(GAME_WIDTH / 2, GAME_HEIGHT / 2).setDepth(21);
     const pct   = Math.round((this.score / (ROUNDS * 10)) * 100);
     const stars = pct >= 90 ? '⭐⭐⭐' : pct >= 60 ? '⭐⭐' : '⭐';
+    const starCount: 1 | 2 | 3 = pct >= 90 ? 3 : pct >= 60 ? 2 : 1;
+    GlobalProgressState.getInstance().recordPlay(
+      SCENE_KEYS.ODD_ONE_OUT, starCount, Date.now() - this.gameStartMs,
+    );
     const bg    = this.add.rectangle(0, 0, 340, 360, 0x0d2244).setStrokeStyle(3, 0x3a6a9a);
     const trop  = this.add.text(0, -148, '🏆', { fontSize: '52px' }).setOrigin(0.5);
     const title = this.add.text(0, -88, 'Hoàn thành!', { fontSize: '24px', color: '#f1c40f', fontFamily: 'Arial', fontStyle: 'bold' }).setOrigin(0.5);
@@ -241,6 +248,6 @@ export class OddOneOutScene extends Phaser.Scene {
 
   private goToMenu() {
     this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start(SCENE_KEYS.MENU));
+    this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start(SCENE_KEYS.WORLD_MAP));
   }
 }
