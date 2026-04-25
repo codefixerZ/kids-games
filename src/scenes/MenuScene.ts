@@ -38,6 +38,34 @@ const GAMES: GameCard[] = [
     emoji: '🔢',
     color: 0xe67e22,
   },
+  {
+    key: SCENE_KEYS.ROTATE_PUZZLE,
+    title: 'Ghép Hình Xoay',
+    description: 'Nhấn vào ô để xoay\nvà ghép hoàn chỉnh!',
+    emoji: '📘',
+    color: 0x2980b9,
+  },
+  {
+    key: SCENE_KEYS.ODD_ONE_OUT,
+    title: 'Tìm Hình Khác Biệt',
+    description: 'Tìm ra hình ảnh\nkhác với các hình còn lại!',
+    emoji: '📖',
+    color: 0x27ae60,
+  },
+  {
+    key: SCENE_KEYS.COLORING,
+    title: 'Tô Màu Sáng Tạo',
+    description: 'Tô màu tranh vẽ\nvà lưu tác phẩm của bạn!',
+    emoji: '🖌️',
+    color: 0xf39c12,
+  },
+  {
+    key: SCENE_KEYS.TIC_TAC_TOE,
+    title: 'X O Fun',
+    description: 'Chơi Tic Tac Toe\nvới AI thông minh!',
+    emoji: '✖⭕',
+    color: 0x8e44ad,
+  },
 ];
 
 export class MenuScene extends Phaser.Scene {

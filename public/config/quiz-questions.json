@@ -1,16 +1,722 @@
 [
   {
     "category": "animals",
-    "question": "Con vật nào có vòi dài?",
-    "options": ["Hươu cao cổ", "Voi", "Tê giác", "Hà mã"],
+    "question": "Con vật nào biết bay trên trời?",
+    "options": [
+      "Mèo",
+      "Chim",
+      "Cá",
+      "Gấu"
+    ],
     "correct": 1,
-    "explanation": "Voi có cái vòi dài dùng để uống nước và cầm đồ vật."
+    "explanation": "Chim có cánh và lông giúp chúng bay lượn trên bầu trời xanh."
+  },
+  {
+    "category": "animals",
+    "question": "Con gì có bộ lông đen nhánh và thích ngủ dưới nước?",
+    "options": [
+      "Cá heo",
+      "Chú dế",
+      "Cá voi",
+      "Chú thỏ"
+    ],
+    "correct": 2,
+    "explanation": "Cá voi là loài động vật lớn nhất đại dương, chúng thường ngủ và bơi cùng nhau."
+  },
+  {
+    "category": "animals",
+    "question": "Ai là bạn của ong mật, thường bay rập rào để tìm hoa?",
+    "options": [
+      "Muỗi",
+      "Bướm",
+      "Kiến",
+      "Bọ hung"
+    ],
+    "correct": 1,
+    "explanation": "Bướm có cánh đẹp và bay lượn quanh những bông hoa rực rỡ."
+  },
+  {
+    "category": "animals",
+    "question": "Con vật nào có cái mũi dài để ngửi mùi thức ăn?",
+    "options": [
+      "Hổ",
+      "Chó",
+      "Mèo",
+      "Chim"
+    ],
+    "correct": 1,
+    "explanation": "Chó có mũi rất thính giúp chúng phát hiện ra mùi hương từ xa."
+  },
+  {
+    "category": "animals",
+    "question": "Con gì sống dưới biển và biết phun nước ra ngoài?",
+    "options": [
+      "Cá ngựa",
+      "Cua",
+      "Sứa",
+      "Cá heo"
+    ],
+    "correct": 3,
+    "explanation": "Cá heo rất thông minh và hay nhảy lên mặt nước để phun nước ra."
+  },
+  {
+    "category": "animals",
+    "question": "Ai là con vật có vảy cứng, sống trong biển và có chiếc vỏ đẹp?",
+    "options": [
+      "Sứa",
+      "Cua",
+      "Cá",
+      "Rùa biển"
+    ],
+    "correct": 3,
+    "explanation": "Rùa biển có chiếc vỏ cứng như một chiếc khiên bảo vệ chúng khỏi kẻ thù."
+  },
+  {
+    "category": "animals",
+    "question": "Con gì có sáu chân và thường ăn lá cây ở những cánh đồng?",
+    "options": [
+      "Bọ cạp",
+      "Côn trùng",
+      "Cá",
+      "Giun"
+    ],
+    "correct": 1,
+    "explanation": "Côn trùng là nhóm sinh vật rất đa dạng, trong đó có nhiều loài ăn thực vật."
+  },
+  {
+    "category": "animals",
+    "question": "Con vật nào có bộ lông dày và thích đào hang dưới đất?",
+    "options": [
+      "Gấu",
+      "Cáo",
+      "Hươu",
+      "Chim"
+    ],
+    "correct": 1,
+    "explanation": "Cáo có bộ lông mượt mà và rất khéo léo khi đào hang để trú đông."
+  },
+  {
+    "category": "animals",
+    "question": "Ai là con vật có chiếc sừng cong vút trên đầu?",
+    "options": [
+      "Ngựa",
+      "Hươu",
+      "Bò",
+      "Trâu"
+    ],
+    "correct": 1,
+    "explanation": "Hươu có đôi chân dài và chiếc sừng cong giúp chúng nhảy rất cao."
+  },
+  {
+    "category": "animals",
+    "question": "Con gì có đuôi dài và thích leo trèo trên cây?",
+    "options": [
+      "Khỉ",
+      "Chó",
+      "Mèo",
+      "Gà"
+    ],
+    "correct": 0,
+    "explanation": "Khỉ rất linh hoạt với đôi chân và đuôi giúp chúng leo trèo giỏi trên cây."
   },
   {
     "category": "math",
-    "question": "6 × 6 = ?",
-    "options": ["32", "34", "36", "38"],
+    "question": "Nếu bạn có 2 quả táo và mẹ thêm vào 1 quả nữa, tổng cộng bạn có bao nhiêu quả?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correct": 1,
+    "explanation": "Khi thêm 1 quả vào 2 quả, chúng ta sẽ có tổng cộng 3 quả táo ngon lành!"
+  },
+  {
+    "category": "math",
+    "question": "Con số nào đứng ngay sau số 5?",
+    "options": [
+      "3",
+      "4",
+      "6",
+      "7"
+    ],
     "correct": 2,
-    "explanation": "6 × 6 = 36"
+    "explanation": "Sau số 5, con số tiếp theo là số 6, giống như bước nhảy trong nhảy lò cò!"
+  },
+  {
+    "category": "math",
+    "question": "Nếu bạn có 4 viên kẹo và ăn hết 2 viên, còn lại bao nhiêu viên?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": 1,
+    "explanation": "Trừ 2 viên khỏi 4 viên sẽ còn lại chính xác 2 viên kẹo thật ngọt!"
+  },
+  {
+    "category": "math",
+    "question": "Số nào lớn hơn: 8 hoặc 3?",
+    "options": [
+      "8",
+      "3",
+      "bằng nhau",
+      "không có"
+    ],
+    "correct": 0,
+    "explanation": "Số 8 cao hơn số 3 giống như một tòa nhà cao hơn một cây nhỏ!"
+  },
+  {
+    "category": "math",
+    "question": "Nếu mỗi con cá có 2 vây, thì 3 con cá có tổng cộng bao nhiêu vây?",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "8"
+    ],
+    "correct": 2,
+    "explanation": "Mỗi con cá có 2 vây, vậy 3 con cá sẽ có 2 cộng 2 cộng 2 bằng 6 vây!"
+  },
+  {
+    "category": "math",
+    "question": "Khi nào chúng ta dùng phép cộng?",
+    "options": [
+      "khi chia kẹo",
+      "khi thêm đồ vào",
+      "khi bớt đồ đi",
+      "khi đếm ngón tay"
+    ],
+    "correct": 1,
+    "explanation": "Phép cộng dùng khi chúng ta thêm những món đồ mới vào, giống như thêm kẹo vào hộp!"
+  },
+  {
+    "category": "math",
+    "question": "Số 9 trừ đi 2 bằng bao nhiêu?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": 2,
+    "explanation": "Nếu lấy đi 2 từ số 9, chúng ta sẽ còn lại số 7 thật tuyệt vời!"
+  },
+  {
+    "category": "math",
+    "question": "Con số nào nhỏ hơn: 10 hoặc 12?",
+    "options": [
+      "10",
+      "12",
+      "cả hai bằng nhau",
+      "không có"
+    ],
+    "correct": 0,
+    "explanation": "Số 10 nhỏ hơn số 12 giống như một chiếc xe máy nhỏ hơn ô tô!"
+  },
+  {
+    "category": "math",
+    "question": "Nếu bạn có 5 ngôi sao và tìm được thêm 3 ngôi sao nữa, bạn có bao nhiêu?",
+    "options": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "correct": 1,
+    "explanation": "5 ngôi sao cộng 3 ngôi sao sẽ cho ta tổng cộng 8 ngôi sao lấp lánh!"
+  },
+  {
+    "category": "math",
+    "question": "Số nào đến trước số 1 trong dãy đếm?",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "correct": 0,
+    "explanation": "Trước số 1 luôn là số 0, nó là điểm bắt đầu của mọi phép đếm!"
+  },
+  {
+    "category": "nature",
+    "question": "Cái gì thường màu xanh và bay trên bầu trời?",
+    "options": [
+      "Mặt trời",
+      "Cái máy bay",
+      "Chim sẻ",
+      "Cái bóng"
+    ],
+    "correct": 2,
+    "explanation": "Chim sẻ có cánh nên bay lượn trên bầu trời xanh trong lành."
+  },
+  {
+    "category": "nature",
+    "question": "Cái gì ra hoa và có lá xanh quanh năm?",
+    "options": [
+      "Cây bàng",
+      "Cây hoa hồng",
+      "Cây xương rồng",
+      "Cỏ non"
+    ],
+    "correct": 1,
+    "explanation": "Cây hoa hồng có những bông hoa đẹp và lá xanh mướt rất vui mắt."
+  },
+  {
+    "category": "nature",
+    "question": "Khi trời lạnh, cái gì rơi xuống đất?",
+    "options": [
+      "Nước mưa",
+      "Bông tuyết",
+      "Cái lá khô",
+      "Bụi bẩn"
+    ],
+    "correct": 1,
+    "explanation": "Bông tuyết trắng tinh rơi xuống đất khi trời đông giá rét."
+  },
+  {
+    "category": "nature",
+    "question": "Cái gì phát sáng vào buổi tối để chỉ đường?",
+    "options": [
+      "Ngọn đèn pin",
+      "Mặt trăng",
+      "Cái bóng",
+      "Cái sao"
+    ],
+    "correct": 1,
+    "explanation": "Mặt trăng to tròn thường sáng lên vào ban đêm giúp chúng ta nhìn rõ."
+  },
+  {
+    "category": "nature",
+    "question": "Cái gì màu đen và nằm ở giữa bầu trời vào ban ngày?",
+    "options": [
+      "Ngôi sao",
+      "Cái mặt trời",
+      "Cái mây",
+      "Cái chim"
+    ],
+    "correct": 1,
+    "explanation": "Mặt trời to tròn tỏa nắng ấm áp cho chúng ta trong ngày."
+  },
+  {
+    "category": "nature",
+    "question": "Cái gì có rễ bám sâu vào đất để uống nước?",
+    "options": [
+      "Cái cây",
+      "Cái đá",
+      "Con cá",
+      "Cái mèo"
+    ],
+    "correct": 0,
+    "explanation": "Cây cối cần rễ bám chặt vào đất để hút nước và dinh dưỡng."
+  },
+  {
+    "category": "nature",
+    "question": "Vào mùa xuân, cái gì thường đâm chồi nảy lộc?",
+    "options": [
+      "Cái hồ",
+      "Cái cây",
+      "Cái sông",
+      "Cái núi"
+    ],
+    "correct": 1,
+    "explanation": "Khi mùa xuân đến, các cành cây sẽ đâm ra những chồi non xanh."
+  },
+  {
+    "category": "nature",
+    "question": "Cái gì làm cho mặt đất trở nên ướt khi trời mưa?",
+    "options": [
+      "Gió",
+      "Bông tuyết",
+      "Nước mưa",
+      "Bụi"
+    ],
+    "correct": 2,
+    "explanation": "Nước mưa rơi xuống làm cho mặt đất, cây cối và hoa lá ướt át."
+  },
+  {
+    "category": "nature",
+    "question": "Cái gì có nhiều cánh hoa và thường màu đỏ?",
+    "options": [
+      "Quả táo",
+      "Cái nấm",
+      "Cây hoa sen",
+      "Cái quả na"
+    ],
+    "correct": 2,
+    "explanation": "Hoa sen có nhiều cánh hoa và màu sắc sặc sỡ, rất đẹp."
+  },
+  {
+    "category": "nature",
+    "question": "Cái gì chuyển động rất nhanh trên mặt nước?",
+    "options": [
+      "Cái cá heo",
+      "Cái cua",
+      "Cái sứa",
+      "Cái ốc"
+    ],
+    "correct": 0,
+    "explanation": "Cá heo bơi nhanh như tên bắn trên mặt nước trong xanh."
+  },
+  {
+    "category": "science",
+    "question": "Con nào có thể thính hơn cả chó?",
+    "options": [
+      "Mèo",
+      "Côn trùng",
+      "Gấu",
+      "Chim sẻ"
+    ],
+    "correct": 1,
+    "explanation": "Côn trùng như gián hay muỗi có thể nghe được những âm thanh rất nhỏ mà con người không nghe thấy được."
+  },
+  {
+    "category": "science",
+    "question": "Khi thả một hòn đá xuống nước, điều gì sẽ xảy ra?",
+    "options": [
+      "Nó sẽ nổi lên mặt nước",
+      "Nó sẽ chìm xuống đáy",
+      "Nó sẽ bay lên trời",
+      "Nó sẽ biến mất ngay lập tức"
+    ],
+    "correct": 1,
+    "explanation": "Hòn đá nặng hơn nước nên khi thả xuống, nó sẽ chìm sâu xuống đáy nước."
+  },
+  {
+    "category": "science",
+    "question": "Cơ quan nào trong cơ thể giúp chúng ta ngửi mùi hoa?",
+    "options": [
+      "Mắt",
+      "Mũi",
+      "Tai",
+      "Miệng"
+    ],
+    "correct": 1,
+    "explanation": "Mũi là cơ quan giúp chúng ta hít thở và ngửi thấy những mùi hương thơm tho của hoa."
+  },
+  {
+    "category": "science",
+    "question": "Màu sắc của bầu trời vào ban ngày thường là màu gì?",
+    "options": [
+      "Xanh",
+      "Đen",
+      "Đỏ",
+      "Vàng"
+    ],
+    "correct": 0,
+    "explanation": "Do ánh nắng mặt trời chiếu xuống, bầu trời vào ban ngày luôn có màu xanh tươi đẹp."
+  },
+  {
+    "category": "science",
+    "question": "Nước sôi ở nhiệt độ nào (đơn vị độ C)?",
+    "options": [
+      "0 độ",
+      "50 độ",
+      "100 độ",
+      "200 độ"
+    ],
+    "correct": 2,
+    "explanation": "Khi nước đạt đến 100 độ C, nó sẽ sôi và biến thành hơi nước bốc lên."
+  },
+  {
+    "category": "science",
+    "question": "Con vật nào có thể thở bằng cả phổi và mang?",
+    "options": [
+      "Cá heo",
+      "Rùa",
+      "Cá sấu",
+      "Cá chép"
+    ],
+    "correct": 1,
+    "explanation": "Rùa là động vật lưỡng cư có thể thở bằng phổi khi ở trên cạn và bằng mang khi ở dưới nước."
+  },
+  {
+    "category": "science",
+    "question": "Khi bạn chà xát hai que gỗ vào nhau, tay bạn sẽ cảm thấy thế nào?",
+    "options": [
+      "Lạnh buốt",
+      "Nóng hổi",
+      "Nhẹ bẫng",
+      "Cứng nhắc"
+    ],
+    "correct": 1,
+    "explanation": "Chà xát tạo ra ma sát, làm chuyển đổi năng lượng cơ học thành nhiệt năng khiến tay nóng lên."
+  },
+  {
+    "category": "science",
+    "question": "Đất sét khi làm ướt sẽ trở thành trạng thái nào?",
+    "options": [
+      "Bị cứng lại",
+      "Trở nên mềm dẻo",
+      "Biến thành đá",
+      "Bay lên không"
+    ],
+    "correct": 1,
+    "explanation": "Khi thêm nước vào đất sét, các hạt đất dính lại với nhau giúp nó trở nên mềm và dễ nặn."
+  },
+  {
+    "category": "science",
+    "question": "Cơ quan nào giúp chúng ta nhìn thấy màu sắc của con bướp?",
+    "options": [
+      "Tai",
+      "Mắt",
+      "Mũi",
+      "Tay"
+    ],
+    "correct": 1,
+    "explanation": "Mắt là cơ quan giúp chúng ta thu nhận ánh sáng và phân biệt các màu sắc khác nhau."
+  },
+  {
+    "category": "science",
+    "question": "Nếu bạn thả một chiếc lá vào nước, chiếc lá sẽ làm gì?",
+    "options": [
+      "Chìm ngay xuống đáy",
+      "Nổi trên mặt nước",
+      "Bay ra xa",
+      "Bốc khói"
+    ],
+    "correct": 1,
+    "explanation": "Vì chiếc lá nhẹ hơn nước, nên khi thả vào nó sẽ nổi lên trên bề mặt nước."
+  },
+  {
+    "category": "geography",
+    "question": "Đại dương nào bao bọc lấy cả nước Việt Nam?",
+    "options": [
+      "Đại Tây Dương",
+      "Thái Bình Dương",
+      "Đại Dương Nam",
+      "Biển Bắc Băng Dương"
+    ],
+    "correct": 1,
+    "explanation": "Việt Nam nằm bên bờ biển rộng lớn của Thái Bình Dương, giúp nước ta có nhiều biển cả đẹp."
+  },
+  {
+    "category": "geography",
+    "question": "Miền Nam nước Việt Nam có thành phố nào nổi tiếng với sông Mekong?",
+    "options": [
+      "Hà Nội",
+      "Đà Nẵng",
+      "Thành phố Hồ Chí Minh",
+      "Huế"
+    ],
+    "correct": 2,
+    "explanation": "Thành phố Hồ Chí Minh nằm ở miền Nam, nơi sông Mekong đổ ra biển và rất nhộn nhịp."
+  },
+  {
+    "category": "geography",
+    "question": "Quốc gia nào bên cạnh Việt Nam có rất nhiều đảo và biển đẹp?",
+    "options": [
+      "Nhật Bản",
+      "Hàn Quốc",
+      "Campuchia",
+      "Thái Lan"
+    ],
+    "correct": 3,
+    "explanation": "Thái Lan là một quốc gia hàng xóm của Việt Nam, nổi tiếng với những bãi biển cát vàng."
+  },
+  {
+    "category": "geography",
+    "question": "Đỉnh núi nào là cao nhất của nước Việt Nam?",
+    "options": [
+      "Núi Fansipan",
+      "Núi Langbiang",
+      "Núi Bà Đen",
+      "Núi Ngàn Sâu"
+    ],
+    "correct": 0,
+    "explanation": "Núi Fansipan ở Lào Cai là đỉnh cao nhất Việt Nam, được gọi là 'nóc nhà Đông Dương'."
+  },
+  {
+    "category": "geography",
+    "question": "Châu lục nào có Việt Nam và các nước như Trung Quốc, Lào, Campuchia?",
+    "options": [
+      "Châu Mỹ",
+      "Châu Âu",
+      "Châu Phi",
+      "Châu Á"
+    ],
+    "correct": 3,
+    "explanation": "Việt Nam cùng với Trung Quốc, Lào và Campuchia đều nằm trên một lục địa lớn gọi là Châu Á."
+  },
+  {
+    "category": "geography",
+    "question": "Biển nào nổi tiếng với những chú cá heo và rùa biển ở Việt Nam?",
+    "options": [
+      "Biển Hồng",
+      "Biển Ả Rập",
+      "Biển Caribbean",
+      "Biển Đông"
+    ],
+    "correct": 3,
+    "explanation": "Biển Đông là biển rộng lớn bên bờ nước ta, nơi sinh sống của nhiều loài động vật biển quý hiếm."
+  },
+  {
+    "category": "geography",
+    "question": "Thủ đô của nước Việt Nam là thành phố nào?",
+    "options": [
+      "Đà Nẵng",
+      "Cần Thơ",
+      "Hà Nội",
+      "Biên Hòa"
+    ],
+    "correct": 2,
+    "explanation": "Hà Nội là thủ đô của Việt Nam, nơi có nhiều di tích lịch sử và trường học cho trẻ em."
+  },
+  {
+    "category": "geography",
+    "question": "Ở Việt Nam, mùa nào thường có gió mùa Đông Bắc thổi về với thời tiết lạnh?",
+    "options": [
+      "Mùa Hè",
+      "Mùa Thu",
+      "Mùa Đông",
+      "Mùa Xuân"
+    ],
+    "correct": 2,
+    "explanation": "Mùa Đông ở Việt Nam thường có gió thổi từ phương Bắc xuống, làm trời trở nên mát mẻ và se lạnh."
+  },
+  {
+    "category": "geography",
+    "question": "Quốc gia nào nằm ở phía Bắc của Việt Nam và là một đồng minh tốt?",
+    "options": [
+      "Myanmar",
+      "Lào",
+      "Campuchia",
+      "Trung Quốc"
+    ],
+    "correct": 3,
+    "explanation": "Trung Quốc nằm ngay phía Bắc Việt Nam, hai nước chúng ta có chung biên giới và rất thân thiết."
+  },
+  {
+    "category": "geography",
+    "question": "Khu vực nào của Việt Nam nổi tiếng với những cánh đồng lúa vàng vào mùa thu hoạch?",
+    "options": [
+      "Miền Trung",
+      "Miền Nam",
+      "Miền Bắc",
+      "Đảo Phú Quốc"
+    ],
+    "correct": 2,
+    "explanation": "Miền Bắc Việt Nam có nhiều vùng đồng bằng rộng lớn trồng lúa, tạo nên những cánh đồng vàng óng."
+  },
+  {
+    "category": "colors",
+    "question": "Hoa hồng thường có màu gì?",
+    "options": [
+      "Xanh dương",
+      "Vàng",
+      "Hồng",
+      "Cam"
+    ],
+    "correct": 2,
+    "explanation": "Hoa hồng đẹp nhất thường mang màu hồng lãng mạn nhé!"
+  },
+  {
+    "category": "colors",
+    "question": "Trời nắng toang toác thường có màu gì?",
+    "options": [
+      "Đen",
+      "Trắng",
+      "Xanh",
+      "Tím"
+    ],
+    "correct": 2,
+    "explanation": "Trời nắng toang toác luôn có màu xanh trong vắt như biển cả!"
+  },
+  {
+    "category": "colors",
+    "question": "Quả chuối thường có màu gì?",
+    "options": [
+      "Xanh lá",
+      "Vàng",
+      "Đỏ",
+      "Tím"
+    ],
+    "correct": 1,
+    "explanation": "Khi chín, quả chuối sẽ có màu vàng óng rất ngon!"
+  },
+  {
+    "category": "colors",
+    "question": "Cái bút bi mới mua thường có màu gì?",
+    "options": [
+      "Đỏ",
+      "Đen",
+      "Xanh dương",
+      "Vàng"
+    ],
+    "correct": 1,
+    "explanation": "Bút đen là màu mực chúng ta dùng để viết bài nhiều nhất!"
+  },
+  {
+    "category": "colors",
+    "question": "Con gà trống gáy ó o thường có màu gì?",
+    "options": [
+      "Trắng",
+      "Đỏ",
+      "Xanh",
+      "Nâu"
+    ],
+    "correct": 1,
+    "explanation": "Mào con gà trống thường đỏ rực như quả cầu lửa!"
+  },
+  {
+    "category": "colors",
+    "question": "Mặt trời tỏa nắng ban mai có màu gì?",
+    "options": [
+      "Vàng",
+      "Cam",
+      "Xanh lá",
+      "Tím"
+    ],
+    "correct": 0,
+    "explanation": "Mặt trời lúc sáng sớm tỏa ánh nắng vàng ấm áp!"
+  },
+  {
+    "category": "colors",
+    "question": "Cái túi nilon bị bỏ rác thường có màu gì?",
+    "options": [
+      "Trắng",
+      "Đen",
+      "Xanh",
+      "Đỏ"
+    ],
+    "correct": 1,
+    "explanation": "Rác thải thường được đựng trong túi màu đen nhé!"
+  },
+  {
+    "category": "colors",
+    "question": "Con vịt con bơi lội thường có màu gì?",
+    "options": [
+      "Xám",
+      "Đen",
+      "Vàng",
+      "Xanh"
+    ],
+    "correct": 1,
+    "explanation": "Con vịt mẹ và vịt con thường có lông màu đen bóng!"
+  },
+  {
+    "category": "colors",
+    "question": "Quả cà chua thường có màu gì?",
+    "options": [
+      "Vàng",
+      "Xanh",
+      "Đỏ",
+      "Cam"
+    ],
+    "correct": 2,
+    "explanation": "Quả cà chua chín mọng sẽ có màu đỏ rất hấp dẫn!"
+  },
+  {
+    "category": "colors",
+    "question": "Cái kẹo mút trong vườn thú thường có màu gì?",
+    "options": [
+      "Xanh dương",
+      "Vàng",
+      "Đen",
+      "Trắng"
+    ],
+    "correct": 0,
+    "explanation": "Kẹo mút xanh dương nhìn thật mát mẻ và ngon miệng!"
   }
 ]

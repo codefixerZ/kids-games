@@ -105,10 +105,10 @@ export class MemoryScene extends Phaser.Scene {
 
   // ─── Header ─────────────────────────────────────────────────────────────────
   private drawHeader() {
-    this.add.rectangle(GAME_WIDTH / 2, HEADER_H / 2, GAME_WIDTH, HEADER_H, 0x0a1628);
+    this.add.rectangle(GAME_WIDTH / 2, HEADER_H / 2, GAME_WIDTH, HEADER_H, 0x0a1628).setDepth(10);
     const back = this.add.text(14, 13, '⬅ Home', {
       fontSize: '14px', color: '#aaaacc', fontFamily: 'Arial',
-    });
+    }).setDepth(10);
     back.setInteractive({ useHandCursor: true });
     back.on('pointerover', () => back.setColor('#ffffff'));
     back.on('pointerout',  () => back.setColor('#aaaacc'));
@@ -116,7 +116,7 @@ export class MemoryScene extends Phaser.Scene {
 
     this.add.text(GAME_WIDTH / 2, 13, '🐾 Lật Thẻ Nhớ', {
       fontSize: '17px', color: '#ffffff', fontFamily: 'Arial', fontStyle: 'bold',
-    }).setOrigin(0.5, 0);
+    }).setOrigin(0.5, 0).setDepth(10);
   }
 
   // ─── Info bar ───────────────────────────────────────────────────────────────

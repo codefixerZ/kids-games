@@ -8,6 +8,10 @@ export const SCENE_KEYS = {
   QUIZ: 'Quiz',
   MEMORY: 'Memory',
   COUNTING: 'Counting',
+  ODD_ONE_OUT: 'OddOneOut',
+  ROTATE_PUZZLE: 'RotatePuzzle',
+  COLORING: 'Coloring',
+  TIC_TAC_TOE: 'TicTacToe',
 } as const;
 
 export const COLORS = {
