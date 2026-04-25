@@ -12,6 +12,9 @@ export const SCENE_KEYS = {
   ROTATE_PUZZLE: 'RotatePuzzle',
   COLORING: 'Coloring',
   TIC_TAC_TOE: 'TicTacToe',
+  MATH_KINGDOM_MAP:    'MathKingdomMap',
+  MATH_KINGDOM_GAME:   'MathKingdomGame',
+  MATH_KINGDOM_REWARD: 'MathKingdomReward',
 } as const;
 
 export const COLORS = {

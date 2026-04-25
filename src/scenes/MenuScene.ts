@@ -66,6 +66,13 @@ const GAMES: GameCard[] = [
     emoji: '✖⭕',
     color: 0x8e44ad,
   },
+  {
+    key: SCENE_KEYS.MATH_KINGDOM_MAP,
+    title: 'Magic Counting',
+    description: 'Đếm số trong vương quốc!',
+    emoji: '🏰',
+    color: 0x1abc9c,
+  },
 ];
 
 // ── Layout constants ──────────────────────────────────────────────────────────
