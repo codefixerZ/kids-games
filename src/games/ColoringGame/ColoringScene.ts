@@ -4,8 +4,9 @@ import { GAME_WIDTH, GAME_HEIGHT, SCENE_KEYS } from '../../config';
 // ── Layout ────────────────────────────────────────────────────────────────────
 const HEADER_H   = 45;
 const PALETTE_H  = 70;
+const BOTTOM_H   = 56;
 const CANVAS_TOP = HEADER_H + PALETTE_H + 4;
-const CANVAS_H   = GAME_HEIGHT - CANVAS_TOP - 60; // leave room for bottom toolbar
+const CANVAS_H   = GAME_HEIGHT - CANVAS_TOP - BOTTOM_H - 4;
 const CANVAS_W   = GAME_WIDTH;
 
 // ── Colour palette ────────────────────────────────────────────────────────────
@@ -16,24 +17,150 @@ const PALETTE = [
   '#a0522d','#ff9ff3','#00d2d3','#000000',
 ];
 
-// ── Coloring templates: drawn with Graphics as filled regions ─────────────────
-interface Template {
-  name: string;
-  draw: (scene: ColoringScene, rt: Phaser.GameObjects.RenderTexture) => void;
-}
+// ── Templates ─────────────────────────────────────────────────────────────────
+type DrawFn = (ctx: CanvasRenderingContext2D, w: number, h: number) => void;
+const TEMPLATES: { name: string; draw: DrawFn }[] = [
+  {
+    name: '🌻 Hoa Hướng Dương',
+    draw(ctx, w, h) {
+      const cx = w / 2, cy = h * 0.45;
+      ctx.lineWidth = 4; ctx.strokeStyle = '#111';
+      // stem
+      ctx.beginPath(); ctx.moveTo(cx, cy + 80); ctx.lineTo(cx, h - 20); ctx.stroke();
+      // leaf
+      ctx.beginPath(); ctx.ellipse(cx - 36, cy + 140, 28, 14, -0.5, 0, Math.PI * 2); ctx.stroke();
+      // petals
+      for (let i = 0; i < 10; i++) {
+        const a = (i / 10) * Math.PI * 2;
+        const px = cx + Math.cos(a) * 96, py = cy + Math.sin(a) * 96;
+        ctx.beginPath(); ctx.ellipse(px, py, 22, 14, a, 0, Math.PI * 2); ctx.stroke();
+      }
+      // center
+      ctx.beginPath(); ctx.arc(cx, cy, 52, 0, Math.PI * 2); ctx.stroke();
+    },
+  },
+  {
+    name: '🐱 Con Mèo',
+    draw(ctx, w, h) {
+      const cx = w / 2, cy = h * 0.3;
+      ctx.lineWidth = 4; ctx.strokeStyle = '#111';
+      // body
+      ctx.beginPath(); ctx.ellipse(cx, cy + 200, 80, 100, 0, 0, Math.PI * 2); ctx.stroke();
+      // head
+      ctx.beginPath(); ctx.arc(cx, cy, 90, 0, Math.PI * 2); ctx.stroke();
+      // ears
+      ctx.beginPath(); ctx.moveTo(cx - 80, cy - 50); ctx.lineTo(cx - 100, cy - 110); ctx.lineTo(cx - 30, cy - 60); ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx + 80, cy - 50); ctx.lineTo(cx + 100, cy - 110); ctx.lineTo(cx + 30, cy - 60); ctx.closePath(); ctx.stroke();
+      // eyes
+      ctx.beginPath(); ctx.arc(cx - 32, cy - 10, 16, 0, Math.PI * 2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx + 32, cy - 10, 16, 0, Math.PI * 2); ctx.stroke();
+      // nose
+      ctx.beginPath(); ctx.moveTo(cx, cy + 16); ctx.lineTo(cx - 9, cy + 28); ctx.lineTo(cx + 9, cy + 28); ctx.closePath(); ctx.stroke();
+      // whiskers
+      for (const dir of [-1, 1]) {
+        ctx.beginPath(); ctx.moveTo(cx + dir * 12, cy + 22); ctx.lineTo(cx + dir * 84, cy + 16); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx + dir * 12, cy + 28); ctx.lineTo(cx + dir * 84, cy + 30); ctx.stroke();
+      }
+      // tail
+      ctx.beginPath(); ctx.moveTo(cx + 76, cy + 260); ctx.bezierCurveTo(cx + 150, cy + 290, cx + 160, cy + 180, cx + 100, cy + 170); ctx.stroke();
+    },
+  },
+  {
+    name: '🏠 Ngôi Nhà',
+    draw(ctx, w, h) {
+      const L = 50, T = 60, W = w - 100, H = 220;
+      ctx.lineWidth = 4; ctx.strokeStyle = '#111';
+      // house body
+      ctx.beginPath(); ctx.rect(L, T + 120, W, H); ctx.stroke();
+      // roof
+      ctx.beginPath(); ctx.moveTo(L - 20, T + 120); ctx.lineTo(w / 2, T); ctx.lineTo(L + W + 20, T + 120); ctx.stroke();
+      // chimney
+      ctx.beginPath(); ctx.rect(L + W - 90, T + 20, 36, 100); ctx.stroke();
+      // door
+      const dx = w / 2 - 28, dy = T + 120 + H - 110;
+      ctx.beginPath(); ctx.rect(dx, dy, 56, 110); ctx.stroke();
+      ctx.beginPath(); ctx.arc(dx + 28, dy, 28, Math.PI, 0); ctx.stroke();
+      // windows (left)
+      ctx.beginPath(); ctx.rect(L + 22, T + 148, 72, 60); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(L + 58, T + 148); ctx.lineTo(L + 58, T + 208); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(L + 22, T + 178); ctx.lineTo(L + 94, T + 178); ctx.stroke();
+      // windows (right)
+      ctx.beginPath(); ctx.rect(w - L - 94, T + 148, 72, 60); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(w - L - 58, T + 148); ctx.lineTo(w - L - 58, T + 208); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(w - L - 94, T + 178); ctx.lineTo(w - L - 22, T + 178); ctx.stroke();
+      // ground
+      ctx.beginPath(); ctx.moveTo(10, T + 120 + H); ctx.lineTo(w - 10, T + 120 + H); ctx.stroke();
+      // sun
+      ctx.beginPath(); ctx.arc(60, 50, 34, 0, Math.PI * 2); ctx.stroke();
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2;
+        ctx.beginPath(); ctx.moveTo(60 + Math.cos(a) * 40, 50 + Math.sin(a) * 40);
+        ctx.lineTo(60 + Math.cos(a) * 52, 50 + Math.sin(a) * 52); ctx.stroke();
+      }
+    },
+  },
+  {
+    name: '🦋 Con Bướm',
+    draw(ctx, w, h) {
+      const cx = w / 2, cy = h * 0.52;
+      ctx.lineWidth = 4; ctx.strokeStyle = '#111';
+      // upper wings
+      ctx.beginPath(); ctx.ellipse(cx - 90, cy - 50, 88, 62, -0.35, 0, Math.PI * 2); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(cx + 90, cy - 50, 88, 62, 0.35, 0, Math.PI * 2); ctx.stroke();
+      // wing details
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.ellipse(cx - 90, cy - 50, 50, 34, -0.35, 0, Math.PI * 2); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(cx + 90, cy - 50, 50, 34, 0.35, 0, Math.PI * 2); ctx.stroke();
+      // lower wings
+      ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.ellipse(cx - 66, cy + 68, 60, 44, 0.4, 0, Math.PI * 2); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(cx + 66, cy + 68, 60, 44, -0.4, 0, Math.PI * 2); ctx.stroke();
+      // body
+      ctx.beginPath(); ctx.ellipse(cx, cy + 14, 13, 76, 0, 0, Math.PI * 2); ctx.stroke();
+      // antennae
+      ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(cx - 9, cy - 62); ctx.quadraticCurveTo(cx - 54, cy - 140, cx - 44, cy - 172); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx + 9, cy - 62); ctx.quadraticCurveTo(cx + 54, cy - 140, cx + 44, cy - 172); ctx.stroke();
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(cx - 44, cy - 174, 8, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + 44, cy - 174, 8, 0, Math.PI * 2); ctx.fill();
+    },
+  },
+  {
+    name: '🐠 Cá Nhiệt Đới',
+    draw(ctx, w, h) {
+      const cx = w / 2, cy = h / 2;
+      ctx.lineWidth = 4; ctx.strokeStyle = '#111';
+      // body
+      ctx.beginPath(); ctx.ellipse(cx, cy, 110, 70, 0, 0, Math.PI * 2); ctx.stroke();
+      // tail fin
+      ctx.beginPath(); ctx.moveTo(cx + 108, cy); ctx.lineTo(cx + 180, cy - 60); ctx.lineTo(cx + 180, cy + 60); ctx.closePath(); ctx.stroke();
+      // top fin
+      ctx.beginPath(); ctx.moveTo(cx - 60, cy - 68); ctx.quadraticCurveTo(cx, cy - 130, cx + 60, cy - 68); ctx.stroke();
+      // eye
+      ctx.beginPath(); ctx.arc(cx - 65, cy - 18, 18, 0, Math.PI * 2); ctx.stroke();
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(cx - 65, cy - 18, 7, 0, Math.PI * 2); ctx.fill();
+      ctx.lineWidth = 4;
+      // stripes
+      ctx.beginPath(); ctx.moveTo(cx - 20, cy - 68); ctx.lineTo(cx - 20, cy + 68); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx + 30, cy - 62); ctx.lineTo(cx + 30, cy + 62); ctx.stroke();
+      // bubbles
+      ctx.lineWidth = 2;
+      for (const [bx, by, br] of [[cx - 130, cy - 80, 10], [cx - 148, cy - 110, 7], [cx - 120, cy - 134, 5]] as [number,number,number][]) {
+        ctx.beginPath(); ctx.arc(bx, by, br, 0, Math.PI * 2); ctx.stroke();
+      }
+    },
+  },
+];
 
 export class ColoringScene extends Phaser.Scene {
-  private rt!:           Phaser.GameObjects.RenderTexture;
   private overlayCanvas!: HTMLCanvasElement;
   private overlayCtx!:   CanvasRenderingContext2D;
+  private templateData!: ImageData;
   private activeColor    = '#e74c3c';
-  private brushSize      = 18;
   private templateIdx    = 0;
-  private isDrawing      = false;
-  private lastX          = 0;
-  private lastY          = 0;
   private colorSwatches: Phaser.GameObjects.Rectangle[] = [];
-  private selectedSwatch!: Phaser.GameObjects.Rectangle;
   private brushSizeText!: Phaser.GameObjects.Text;
 
   constructor() { super({ key: SCENE_KEYS.COLORING }); }
@@ -43,7 +170,6 @@ export class ColoringScene extends Phaser.Scene {
     this.drawHeader();
     this.drawPalette();
     this.createOverlayCanvas();
-    this.drawTemplate();
     this.drawBottomBar();
   }
 
@@ -55,14 +181,12 @@ export class ColoringScene extends Phaser.Scene {
   // ── Header ──────────────────────────────────────────────────────────────────
   private drawHeader() {
     this.add.rectangle(GAME_WIDTH / 2, HEADER_H / 2, GAME_WIDTH, HEADER_H, 0x0a1628).setDepth(10);
-
     const back = this.add.text(14, 13, '⬅ Home', {
       fontSize: '14px', color: '#aaaacc', fontFamily: 'Arial',
     }).setDepth(10).setInteractive({ useHandCursor: true });
     back.on('pointerover', () => back.setColor('#ffffff'));
     back.on('pointerout',  () => back.setColor('#aaaacc'));
     back.on('pointerdown', () => this.goToMenu());
-
     this.add.text(GAME_WIDTH / 2, 13, '🎨 Tô Màu', {
       fontSize: '16px', color: '#ffffff', fontFamily: 'Arial', fontStyle: 'bold',
     }).setOrigin(0.5, 0).setDepth(10);
@@ -71,283 +195,185 @@ export class ColoringScene extends Phaser.Scene {
   // ── Colour palette ─────────────────────────────────────────────────────────
   private drawPalette() {
     this.add.rectangle(GAME_WIDTH / 2, HEADER_H + PALETTE_H / 2, GAME_WIDTH, PALETTE_H, 0x0f1f3a);
-
-    const swatchSize  = 32;
-    const cols        = 8;
-    const totalW      = cols * swatchSize + (cols - 1) * 4;
-    const startX      = (GAME_WIDTH - totalW) / 2;
-    const row1Y       = HEADER_H + 10;
-    const row2Y       = HEADER_H + 10 + swatchSize + 4;
-
-    this.colorSwatches = [];
+    const swSize = 32, cols = 8, gapX = 4;
+    const totalW = cols * swSize + (cols - 1) * gapX;
+    const startX = (GAME_WIDTH - totalW) / 2;
 
     PALETTE.forEach((hex, i) => {
-      const col = i % cols;
-      const row = Math.floor(i / cols);
-      const x   = startX + col * (swatchSize + 4) + swatchSize / 2;
-      const y   = (row === 0 ? row1Y : row2Y) + swatchSize / 2;
-
-      const swatch = this.add.rectangle(x, y, swatchSize, swatchSize, Phaser.Display.Color.HexStringToColor(hex).color)
+      const col = i % cols, row = Math.floor(i / cols);
+      const x = startX + col * (swSize + gapX) + swSize / 2;
+      const y = HEADER_H + 10 + row * (swSize + 4) + swSize / 2;
+      const swatch = this.add.rectangle(x, y, swSize, swSize,
+        Phaser.Display.Color.HexStringToColor(hex).color)
         .setStrokeStyle(i === 0 ? 3 : 1, i === 0 ? 0xffffff : 0x444466)
         .setInteractive({ useHandCursor: true });
-
       swatch.on('pointerdown', () => {
         this.activeColor = hex;
         this.colorSwatches.forEach(s => s.setStrokeStyle(1, 0x444466));
         swatch.setStrokeStyle(3, 0xffffff);
-        this.selectedSwatch = swatch;
       });
-
-      if (i === 0) this.selectedSwatch = swatch;
       this.colorSwatches.push(swatch);
     });
   }
 
-  // ── HTML Canvas overlay for drawing ────────────────────────────────────────
+  // ── Overlay canvas (drawing area only — doesn't cover header/palette/bar) ──
   private createOverlayCanvas() {
-    // Create a transparent HTML canvas on top of the Phaser canvas for drawing
     const phaserCanvas = this.game.canvas;
     const parent = phaserCanvas.parentElement!;
+    parent.style.position = 'relative';
 
-    // Remove existing overlay if any
-    const existing = parent.querySelector('#coloring-overlay') as HTMLCanvasElement;
+    const existing = parent.querySelector('#coloring-overlay') as HTMLCanvasElement | null;
     if (existing) existing.remove();
 
-    const overlay = document.createElement('canvas');
-    overlay.id    = 'coloring-overlay';
-    overlay.width  = GAME_WIDTH;
-    overlay.height = GAME_HEIGHT;
-
-    // Match Phaser canvas transform/position
     const scaleX = phaserCanvas.offsetWidth  / GAME_WIDTH;
     const scaleY = phaserCanvas.offsetHeight / GAME_HEIGHT;
 
-    overlay.style.position        = 'absolute';
-    overlay.style.left            = phaserCanvas.offsetLeft + 'px';
-    overlay.style.top             = phaserCanvas.offsetTop  + 'px';
-    overlay.style.width           = phaserCanvas.offsetWidth  + 'px';
-    overlay.style.height          = phaserCanvas.offsetHeight + 'px';
-    overlay.style.transformOrigin = '0 0';
-    overlay.style.cursor          = 'crosshair';
-    overlay.style.touchAction     = 'none';
-    overlay.style.zIndex          = '5';
-    parent.style.position         = 'relative';
+    const overlay = document.createElement('canvas');
+    overlay.id     = 'coloring-overlay';
+    overlay.width  = GAME_WIDTH;
+    overlay.height = CANVAS_H;           // logical height = drawing area only
+    overlay.style.position = 'absolute';
+    overlay.style.left   = `${phaserCanvas.offsetLeft}px`;
+    overlay.style.top    = `${phaserCanvas.offsetTop + CANVAS_TOP * scaleY}px`;
+    overlay.style.width  = `${phaserCanvas.offsetWidth}px`;
+    overlay.style.height = `${CANVAS_H * scaleY}px`;  // screen height = scaled drawing area
+    overlay.style.cursor      = 'crosshair';
+    overlay.style.touchAction = 'none';
+    overlay.style.zIndex      = '5';
     parent.appendChild(overlay);
 
     this.overlayCanvas = overlay;
     this.overlayCtx    = overlay.getContext('2d')!;
 
-    // Draw initial white background for canvas area
-    this.overlayCtx.fillStyle = '#fdf6e3';
-    this.overlayCtx.fillRect(0, CANVAS_TOP, CANVAS_W, CANVAS_H);
-
-    // Draw template outlines
     this.drawTemplateOnOverlay();
 
-    // Pointer events (scaled)
+    // ── Convert client coords → overlay canvas logical coords ──────────────
     const toCanvas = (e: PointerEvent) => {
       const rect = overlay.getBoundingClientRect();
       return {
-        x: (e.clientX - rect.left) * (GAME_WIDTH  / overlay.offsetWidth),
-        y: (e.clientY - rect.top)  * (GAME_HEIGHT / overlay.offsetHeight),
+        x: (e.clientX - rect.left) * (GAME_WIDTH / overlay.offsetWidth),
+        y: (e.clientY - rect.top)  * (CANVAS_H  / overlay.offsetHeight),
       };
     };
 
     overlay.addEventListener('pointerdown', (e) => {
       const { x, y } = toCanvas(e);
-      if (y < CANVAS_TOP) return;   // ignore header/palette area
-      this.isDrawing = true;
-      this.lastX = x; this.lastY = y;
-      this.paintDot(x, y);
+      this.floodFill(Math.round(x), Math.round(y));
     });
 
-    overlay.addEventListener('pointermove', (e) => {
-      if (!this.isDrawing) return;
-      const { x, y } = toCanvas(e);
-      if (y < CANVAS_TOP) return;
-      this.paintLine(this.lastX, this.lastY, x, y);
-      this.lastX = x; this.lastY = y;
-    });
-
-    overlay.addEventListener('pointerup',     () => { this.isDrawing = false; });
-    overlay.addEventListener('pointerleave',  () => { this.isDrawing = false; });
-
-    // Clean up when scene shuts down
     this.events.once('shutdown', () => overlay.remove());
     this.events.once('destroy',  () => overlay.remove());
   }
 
-  private paintDot(x: number, y: number) {
-    const ctx = this.overlayCtx;
-    ctx.beginPath();
-    ctx.arc(x, y, this.brushSize / 2, 0, Math.PI * 2);
-    ctx.fillStyle = this.activeColor;
-    ctx.fill();
-  }
-
-  private paintLine(x1: number, y1: number, x2: number, y2: number) {
-    const ctx = this.overlayCtx;
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.strokeStyle = this.activeColor;
-    ctx.lineWidth   = this.brushSize;
-    ctx.lineCap     = 'round';
-    ctx.lineJoin    = 'round';
-    ctx.stroke();
-  }
-
-  // ── Templates ─────────────────────────────────────────────────────────────
-  private TEMPLATES = [
-    { name: '🌻 Hoa Hướng Dương', draw: (ctx: CanvasRenderingContext2D) => {
-      const cx = CANVAS_W / 2, cy = CANVAS_TOP + CANVAS_H / 2 - 30;
-      // stem
-      ctx.beginPath(); ctx.moveTo(cx, cy + 80); ctx.lineTo(cx, cy + 200);
-      ctx.strokeStyle = '#000'; ctx.lineWidth = 6; ctx.stroke();
-      // petals
-      for (let i = 0; i < 8; i++) {
-        const angle = (i * Math.PI * 2) / 8;
-        const px = cx + Math.cos(angle) * 90;
-        const py = cy + Math.sin(angle) * 90;
-        ctx.beginPath(); ctx.ellipse(px, py, 28, 18, angle, 0, Math.PI * 2);
-        ctx.strokeStyle = '#000'; ctx.lineWidth = 3; ctx.stroke();
-      }
-      // center
-      ctx.beginPath(); ctx.arc(cx, cy, 55, 0, Math.PI * 2);
-      ctx.strokeStyle = '#000'; ctx.lineWidth = 4; ctx.stroke();
-      // leaves
-      ctx.beginPath(); ctx.ellipse(cx - 40, cy + 130, 30, 15, -0.5, 0, Math.PI * 2);
-      ctx.strokeStyle = '#000'; ctx.lineWidth = 3; ctx.stroke();
-    }},
-    { name: '🐱 Con Mèo', draw: (ctx: CanvasRenderingContext2D) => {
-      const cx = CANVAS_W / 2, cy = CANVAS_TOP + 80;
-      ctx.strokeStyle = '#000'; ctx.lineWidth = 4;
-      // head
-      ctx.beginPath(); ctx.arc(cx, cy + 80, 80, 0, Math.PI * 2); ctx.stroke();
-      // ears
-      ctx.beginPath(); ctx.moveTo(cx - 70, cy + 20); ctx.lineTo(cx - 95, cy - 30); ctx.lineTo(cx - 30, cy + 10); ctx.closePath(); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx + 70, cy + 20); ctx.lineTo(cx + 95, cy - 30); ctx.lineTo(cx + 30, cy + 10); ctx.closePath(); ctx.stroke();
-      // eyes
-      ctx.beginPath(); ctx.arc(cx - 28, cy + 65, 14, 0, Math.PI * 2); ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx + 28, cy + 65, 14, 0, Math.PI * 2); ctx.stroke();
-      // nose
-      ctx.beginPath(); ctx.moveTo(cx, cy + 95); ctx.lineTo(cx - 8, cy + 108); ctx.lineTo(cx + 8, cy + 108); ctx.closePath(); ctx.stroke();
-      // whiskers
-      ctx.beginPath(); ctx.moveTo(cx - 80, cy + 102); ctx.lineTo(cx - 20, cy + 100); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx + 80, cy + 102); ctx.lineTo(cx + 20, cy + 100); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx - 80, cy + 112); ctx.lineTo(cx - 20, cy + 108); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx + 80, cy + 112); ctx.lineTo(cx + 20, cy + 108); ctx.stroke();
-      // body
-      ctx.beginPath(); ctx.ellipse(cx, cy + 240, 70, 100, 0, 0, Math.PI * 2); ctx.stroke();
-      // tail
-      ctx.beginPath(); ctx.moveTo(cx + 70, cy + 280); ctx.bezierCurveTo(cx + 140, cy + 320, cx + 160, cy + 200, cx + 100, cy + 180); ctx.stroke();
-    }},
-    { name: '🏠 Ngôi Nhà', draw: (ctx: CanvasRenderingContext2D) => {
-      const left = 80, top = CANVAS_TOP + 80, w = CANVAS_W - 160, h = 200;
-      ctx.strokeStyle = '#000'; ctx.lineWidth = 4;
-      // house body
-      ctx.beginPath(); ctx.rect(left, top + 120, w, h); ctx.stroke();
-      // roof
-      ctx.beginPath(); ctx.moveTo(left - 20, top + 120); ctx.lineTo(CANVAS_W / 2, top); ctx.lineTo(left + w + 20, top + 120); ctx.stroke();
-      // door
-      const dx = CANVAS_W / 2 - 28, dy = top + 120 + h - 100;
-      ctx.beginPath(); ctx.rect(dx, dy, 56, 100); ctx.stroke();
-      ctx.beginPath(); ctx.arc(dx + 28, dy, 28, Math.PI, 0); ctx.stroke();
-      // windows
-      const winY = top + 150;
-      ctx.beginPath(); ctx.rect(left + 30, winY, 70, 60); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(left + 65, winY); ctx.lineTo(left + 65, winY + 60); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(left + 30, winY + 30); ctx.lineTo(left + 100, winY + 30); ctx.stroke();
-      ctx.beginPath(); ctx.rect(CANVAS_W - left - 100, winY, 70, 60); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(CANVAS_W - left - 65, winY); ctx.lineTo(CANVAS_W - left - 65, winY + 60); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(CANVAS_W - left - 100, winY + 30); ctx.lineTo(CANVAS_W - left - 30, winY + 30); ctx.stroke();
-      // chimney
-      ctx.beginPath(); ctx.rect(left + w - 100, top + 20, 40, 100); ctx.stroke();
-      // ground
-      ctx.beginPath(); ctx.moveTo(20, top + 120 + h); ctx.lineTo(CANVAS_W - 20, top + 120 + h); ctx.stroke();
-      // sun
-      ctx.beginPath(); ctx.arc(CANVAS_W - 60, CANVAS_TOP + 30, 30, 0, Math.PI * 2); ctx.stroke();
-      for (let i = 0; i < 8; i++) {
-        const a = (i / 8) * Math.PI * 2;
-        ctx.beginPath();
-        ctx.moveTo(CANVAS_W - 60 + Math.cos(a) * 36, CANVAS_TOP + 30 + Math.sin(a) * 36);
-        ctx.lineTo(CANVAS_W - 60 + Math.cos(a) * 46, CANVAS_TOP + 30 + Math.sin(a) * 46);
-        ctx.stroke();
-      }
-    }},
-    { name: '🦋 Con Bướm', draw: (ctx: CanvasRenderingContext2D) => {
-      const cx = CANVAS_W / 2, cy = CANVAS_TOP + CANVAS_H / 2 - 20;
-      ctx.strokeStyle = '#000'; ctx.lineWidth = 3;
-      // upper wings
-      ctx.beginPath(); ctx.ellipse(cx - 80, cy - 40, 80, 55, -0.4, 0, Math.PI * 2); ctx.stroke();
-      ctx.beginPath(); ctx.ellipse(cx + 80, cy - 40, 80, 55, 0.4, 0, Math.PI * 2); ctx.stroke();
-      // lower wings
-      ctx.beginPath(); ctx.ellipse(cx - 60, cy + 60, 55, 40, 0.4, 0, Math.PI * 2); ctx.stroke();
-      ctx.beginPath(); ctx.ellipse(cx + 60, cy + 60, 55, 40, -0.4, 0, Math.PI * 2); ctx.stroke();
-      // body
-      ctx.beginPath(); ctx.ellipse(cx, cy + 10, 12, 70, 0, 0, Math.PI * 2); ctx.stroke();
-      // antennae
-      ctx.beginPath(); ctx.moveTo(cx - 8, cy - 60); ctx.quadraticCurveTo(cx - 50, cy - 130, cx - 40, cy - 160); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx + 8, cy - 60); ctx.quadraticCurveTo(cx + 50, cy - 130, cx + 40, cy - 160); ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx - 40, cy - 162, 7, 0, Math.PI * 2); ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx + 40, cy - 162, 7, 0, Math.PI * 2); ctx.stroke();
-    }},
-  ];
-
+  // ── Draw (or redraw) the current template ──────────────────────────────────
   private drawTemplateOnOverlay() {
     const ctx = this.overlayCtx;
-    // Clear canvas area
     ctx.fillStyle = '#fdf6e3';
-    ctx.fillRect(0, CANVAS_TOP, CANVAS_W, CANVAS_H);
-    // Draw template
-    const t = this.TEMPLATES[this.templateIdx % this.TEMPLATES.length];
+    ctx.fillRect(0, 0, GAME_WIDTH, CANVAS_H);
+    const t = TEMPLATES[this.templateIdx % TEMPLATES.length];
     ctx.save();
-    t.draw(ctx);
+    t.draw(ctx, GAME_WIDTH, CANVAS_H);
     ctx.restore();
+    // Store snapshot so we can restore on clear
+    this.templateData = ctx.getImageData(0, 0, GAME_WIDTH, CANVAS_H);
   }
 
-  private drawTemplate() {
-    // No-op: drawing is done on the overlay canvas
+  // ── Scanline flood fill ────────────────────────────────────────────────────
+  private floodFill(startX: number, startY: number) {
+    const ctx   = this.overlayCtx;
+    const W     = GAME_WIDTH;
+    const H     = CANVAS_H;
+    const imgData = ctx.getImageData(0, 0, W, H);
+    const data  = imgData.data;
+
+    if (startX < 0 || startY < 0 || startX >= W || startY >= H) return;
+
+    const base = (startY * W + startX) * 4;
+    const tr = data[base], tg = data[base + 1], tb = data[base + 2];
+
+    // Don't fill on dark template lines
+    if (tr < 80 && tg < 80 && tb < 80) return;
+
+    // Parse fill colour
+    const hex = this.activeColor.replace('#', '');
+    const fr = parseInt(hex.slice(0, 2), 16);
+    const fg = parseInt(hex.slice(2, 4), 16);
+    const fb = parseInt(hex.slice(4, 6), 16);
+
+    // Already filled with same colour?
+    if (tr === fr && tg === fg && tb === fb) return;
+
+    const TOL = 36;
+    const match = (i: number) =>
+      Math.abs(data[i]   - tr) <= TOL &&
+      Math.abs(data[i+1] - tg) <= TOL &&
+      Math.abs(data[i+2] - tb) <= TOL;
+
+    const visited = new Uint8Array(W * H);
+    const stack: [number, number][] = [[startX, startY]];
+
+    while (stack.length) {
+      const [x, y] = stack.pop()!;
+      if (x < 0 || x >= W || y < 0 || y >= H) continue;
+      if (visited[y * W + x]) continue;
+      if (!match((y * W + x) * 4)) continue;
+
+      // Scan left
+      let lx = x;
+      while (lx > 0 && !visited[y * W + (lx - 1)] && match((y * W + lx - 1) * 4)) lx--;
+      // Scan right
+      let rx = x;
+      while (rx < W - 1 && !visited[y * W + (rx + 1)] && match((y * W + rx + 1) * 4)) rx++;
+
+      // Fill span
+      for (let cx = lx; cx <= rx; cx++) {
+        const pi = (y * W + cx) * 4;
+        data[pi] = fr; data[pi+1] = fg; data[pi+2] = fb; data[pi+3] = 255;
+        visited[y * W + cx] = 1;
+      }
+
+      // Push rows above/below
+      for (let cx = lx; cx <= rx; cx++) {
+        if (y > 0   && !visited[(y-1)*W+cx] && match(((y-1)*W+cx)*4)) stack.push([cx, y-1]);
+        if (y < H-1 && !visited[(y+1)*W+cx] && match(((y+1)*W+cx)*4)) stack.push([cx, y+1]);
+      }
+    }
+
+    ctx.putImageData(imgData, 0, 0);
   }
 
-  // ── Bottom bar ─────────────────────────────────────────────────────────────
+  // ── Bottom bar (Phaser objects — no overlay in this region) ───────────────
   private drawBottomBar() {
-    const barY = GAME_HEIGHT - 50;
-    this.add.rectangle(GAME_WIDTH / 2, barY, GAME_WIDTH, 60, 0x0a1628).setDepth(15);
-
-    // Brush size -/+
-    this.brushSizeText = this.add.text(GAME_WIDTH / 2, barY, `✏️ ${this.brushSize}`, {
-      fontSize: '14px', color: '#fff', fontFamily: 'Arial',
-    }).setOrigin(0.5).setDepth(16);
+    const barY = GAME_HEIGHT - BOTTOM_H / 2;
+    this.add.rectangle(GAME_WIDTH / 2, barY, GAME_WIDTH, BOTTOM_H, 0x0a1628).setDepth(15);
 
     const mkBtn = (label: string, bx: number, fn: () => void, col = 0x2c3e50) => {
-      const b = this.add.rectangle(bx, barY, 60, 38, col)
+      const b = this.add.rectangle(bx, barY, 72, 40, col)
         .setStrokeStyle(1, 0x5a8aba).setInteractive({ useHandCursor: true }).setDepth(16);
-      b.on('pointerover', () => b.setAlpha(0.8)); b.on('pointerout', () => b.setAlpha(1));
+      b.on('pointerover', () => b.setAlpha(0.8));
+      b.on('pointerout',  () => b.setAlpha(1));
       b.on('pointerdown', fn);
-      this.add.text(bx, barY, label, { fontSize: '13px', color: '#fff', fontFamily: 'Arial', fontStyle: 'bold' })
-        .setOrigin(0.5).setDepth(17);
+      this.add.text(bx, barY, label, {
+        fontSize: '13px', color: '#fff', fontFamily: 'Arial', fontStyle: 'bold',
+      }).setOrigin(0.5).setDepth(17);
       return b;
     };
 
-    mkBtn('−', GAME_WIDTH / 2 - 52, () => {
-      this.brushSize = Math.max(4, this.brushSize - 4);
-      this.brushSizeText.setText(`✏️ ${this.brushSize}`);
-    });
-    mkBtn('+', GAME_WIDTH / 2 + 52, () => {
-      this.brushSize = Math.min(60, this.brushSize + 4);
-      this.brushSizeText.setText(`✏️ ${this.brushSize}`);
-    });
-    mkBtn('🗑️', 60, () => this.clearCanvas(), 0xc0392b);
-    mkBtn('➡', GAME_WIDTH - 60, () => { this.templateIdx++; this.drawTemplateOnOverlay(); }, 0x27ae60);
-    mkBtn('💾', GAME_WIDTH - 128, () => this.saveImage(), 0x2980b9);
+    mkBtn('🗑️ Xóa', 52,              () => this.clearCanvas(), 0xc0392b);
+    mkBtn('➡ Tiếp', GAME_WIDTH - 52,  () => { this.templateIdx++; this.drawTemplateOnOverlay(); }, 0x27ae60);
+    mkBtn('💾 Lưu',  GAME_WIDTH - 134, () => this.saveImage(), 0x2980b9);
+
+    // Current template name
+    this.add.text(GAME_WIDTH / 2, barY, TEMPLATES[0].name, {
+      fontSize: '12px', color: '#8899bb', fontFamily: 'Arial',
+    }).setOrigin(0.5).setDepth(17);
   }
 
+  // ── Clear = restore template (no user fills) ───────────────────────────────
   private clearCanvas() {
-    const ctx = this.overlayCtx;
-    ctx.fillStyle = '#fdf6e3';
-    ctx.fillRect(0, CANVAS_TOP, CANVAS_W, CANVAS_H);
-    this.drawTemplateOnOverlay();
+    if (this.templateData) {
+      this.overlayCtx.putImageData(this.templateData, 0, 0);
+    }
   }
 
   private saveImage() {
@@ -358,9 +384,7 @@ export class ColoringScene extends Phaser.Scene {
   }
 
   private goToMenu() {
-    if (this.overlayCanvas?.parentElement) {
-      this.overlayCanvas.remove();
-    }
+    this.overlayCanvas?.remove();
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start(SCENE_KEYS.MENU));
   }

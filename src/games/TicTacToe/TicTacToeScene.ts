@@ -3,10 +3,10 @@ import { GAME_WIDTH, GAME_HEIGHT, SCENE_KEYS } from '../../config';
 
 // ── Layout ────────────────────────────────────────────────────────────────────
 const HEADER_H  = 45;
-const BOARD_SIZE = 300;              // board is 300×300
-const CELL      = BOARD_SIZE / 3;   // 100×100 per cell
+const BOARD_SIZE = 390;              // board is 390×390
+const CELL      = BOARD_SIZE / 3;   // 130×130 per cell
 const BOARD_X   = (GAME_WIDTH - BOARD_SIZE) / 2;
-const BOARD_Y   = HEADER_H + 100;
+const BOARD_Y   = HEADER_H + 70;
 
 type Mark = 'X' | 'O' | null;
 type Difficulty = 'easy' | 'hard';
@@ -143,7 +143,7 @@ export class TicTacToeScene extends Phaser.Scene {
       bg.on('pointerdown', () => this.playerMove(i));
 
       const mark = this.add.text(cx, cy, '', {
-        fontSize: '56px', fontFamily: 'Arial', fontStyle: 'bold',
+        fontSize: '76px', fontFamily: 'Arial', fontStyle: 'bold',
       }).setOrigin(0.5);
 
       this.cellBgs.push(bg);
