@@ -24,6 +24,13 @@ const GAMES: GameCard[] = [
     emoji: '🧠',
     color: 0x9b59b6,
   },
+  {
+    key: SCENE_KEYS.MEMORY,
+    title: 'Lật Thẻ Nhớ',
+    description: 'Lật thẻ và tìm\ncặp giống nhau!',
+    emoji: '🐾',
+    color: 0x16a085,
+  },
 ];
 
 export class MenuScene extends Phaser.Scene {

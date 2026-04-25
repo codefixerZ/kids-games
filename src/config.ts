@@ -6,6 +6,7 @@ export const SCENE_KEYS = {
   MENU: 'Menu',
   DRAW_GUESS: 'DrawGuess',
   QUIZ: 'Quiz',
+  MEMORY: 'Memory',
 } as const;
 
 export const COLORS = {

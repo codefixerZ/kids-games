@@ -1,0 +1,22 @@
+[
+  { "id": "cat",       "emoji": "🐱", "color": 9240253  },
+  { "id": "dog",       "emoji": "🐶", "color": 15136800 },
+  { "id": "frog",      "emoji": "🐸", "color": 2600992  },
+  { "id": "panda",     "emoji": "🐼", "color": 2893904  },
+  { "id": "fox",       "emoji": "🦊", "color": 13844224 },
+  { "id": "tiger",     "emoji": "🐯", "color": 15027456 },
+  { "id": "koala",     "emoji": "🐨", "color": 8355997  },
+  { "id": "lion",      "emoji": "🦁", "color": 15978258 },
+  { "id": "cow",       "emoji": "🐮", "color": 2600992  },
+  { "id": "pig",       "emoji": "🐷", "color": 15148316 },
+  { "id": "butterfly", "emoji": "🦋", "color": 10171582 },
+  { "id": "turtle",    "emoji": "🐢", "color": 1751692  },
+  { "id": "unicorn",   "emoji": "🦄", "color": 16208314 },
+  { "id": "penguin",   "emoji": "🐧", "color": 2726274  },
+  { "id": "elephant",  "emoji": "🐘", "color": 8355997  },
+  { "id": "dolphin",   "emoji": "🐬", "color": 3448283  },
+  { "id": "eagle",     "emoji": "🦅", "color": 9332542  },
+  { "id": "crab",      "emoji": "🦀", "color": 12597275 },
+  { "id": "octopus",   "emoji": "🐙", "color": 9240253  },
+  { "id": "giraffe",   "emoji": "🦒", "color": 15978258 }
+]
