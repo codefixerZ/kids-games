@@ -98,6 +98,7 @@ export class DrawGuessScene extends Phaser.Scene {
     });
 
     this.scoreManager.on('roundEnd', ({ score }: { score: number }) => {
+      this.drawingCanvas.hide();
       this.vocabDisplay.showRoundEnd(score);
     });
 
@@ -120,6 +121,7 @@ export class DrawGuessScene extends Phaser.Scene {
       const canvas = await this.drawingCanvas.snapshotToCanvas();
       const results = await this.aiGuesser.classify(canvas);
       const evalResult = this.scoreManager.evaluate(results);
+      this.drawingCanvas.hide(); // reveal the Phaser result overlay underneath
       this.vocabDisplay.showResult(evalResult, this.scoreManager.getScore());
       this.headerScoreText.setText(`Điểm: ${this.scoreManager.getScore()}`);
     } catch (err) {
@@ -130,6 +132,7 @@ export class DrawGuessScene extends Phaser.Scene {
   }
 
   private advanceWord() {
+    this.drawingCanvas.show(); // bring back the drawing canvas for the next word
     this.drawingCanvas.clearCanvas();
     this.scoreManager.nextWord();
   }

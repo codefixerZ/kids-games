@@ -134,6 +134,16 @@ export class DrawingCanvas {
     return Promise.resolve(this.canvas);
   }
 
+  /** Hide the HTML canvas so Phaser UI underneath (result panel) is visible */
+  hide() {
+    this.canvas.style.display = 'none';
+  }
+
+  /** Show the HTML canvas again for drawing */
+  show() {
+    this.canvas.style.display = 'block';
+  }
+
   destroy() {
     window.removeEventListener('resize', this.onResize);
     this.scene.scale.off('resize', this.onResize);
