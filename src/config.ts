@@ -7,6 +7,7 @@ export const SCENE_KEYS = {
   DRAW_GUESS: 'DrawGuess',
   QUIZ: 'Quiz',
   MEMORY: 'Memory',
+  COUNTING: 'Counting',
 } as const;
 
 export const COLORS = {

@@ -31,6 +31,13 @@ const GAMES: GameCard[] = [
     emoji: '🐾',
     color: 0x16a085,
   },
+  {
+    key: SCENE_KEYS.COUNTING,
+    title: 'Học Đếm Số',
+    description: 'Đếm các con vật và\nchọn số đúng!',
+    emoji: '🔢',
+    color: 0xe67e22,
+  },
 ];
 
 export class MenuScene extends Phaser.Scene {
